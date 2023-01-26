@@ -18,8 +18,9 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh '''
-                    docker build -t marcustechstarter/jenkinshub:${VERSION} .
                     docker login -u $USERNAME -p $PASSWORD
+                    docker build -t marcustechstarter/jenkinshub:${VERSION} .
+                   
                     docker push marcustechstarter/jenkinshub:${VERSION} 
                     '''
                 }
